@@ -1,0 +1,18 @@
+# ESPHome secrets — real values live in the add-on, never commit
+config/secrets.yaml
+
+# Editors / OS
+.DS_Store
+*.swp
+.idea/
+.vscode/
+.venv/
+__pycache__/
+*.pyc
+
+# ESPHome local tooling
+.esphome/
+esphome/.esphome/
+*.bin
+*.merged.bin
+*.uf2

@@ -1,0 +1,78 @@
+# ***************************************************************
+# Atom Echo — custom node config
+# Board: M5Stack Atom Echo (ESP32-S3, 8MB flash / 8MB PSRAM)
+# Runs via the ESPHome Home Assistant add-on (config in /config/esphome)
+# ***************************************************************
+esphome:
+  name: atom-echo-<HOSTNAME>
+  friendly_name: "Atom Echo"
+
+esp32:
+  board: m5stack-atom-echo
+  variant: esp32s3
+  framework:
+    type: esp-idf
+
+# Enable logging (serial)
+logger:
+
+# Home Assistant API + local OTA updates
+api:
+  encryption:
+    key: "!secret api_encryption_key"
+
+ota:
+  - platform: esphome
+    password: "!secret ota_password"
+
+wifi:
+  ssid: "!secret wifi_ssid"
+  password: "!secret wifi_password"
+
+  # Optional: failover / static IP once your network is known
+  # manual_ip:
+  #   static_ip: 192.168.1.x
+  #   gateway: 192.168.1.1
+  #   subnet: 255.255.255.0
+
+  ap:
+    ssid: "Atom Echo Fallback Hotspot"
+    password: "!secret fallback_ap_password"
+
+captive_portal:
+
+# ---------------------------------------------------------------------------
+# Voice assistant (placeholder — enable when you set up HA voice)
+#
+# NOTE: The Atom Echo uses an external CODEC (I2S mic + speaker amp). The
+# exact pins below are placeholders — VERIFY them against the current
+# ESPHome docs "M5Stack Atom Echo" device page before enabling, and use the
+# board's `m5stack-atom-echo` definition where possible:
+#
+# microphone:
+#   - platform: esp32_s3_board
+#     id: echo_mic
+#
+# i2s_audio:
+#   - id: echo_i2s        # confirm WS/BCLK/data pins from official docs
+#     i2s_ws_pin: GPIO8
+#     i2s_sck_pin: GPIO18
+#     input_pin: GPIO9
+#
+# speaker:
+#   - platform: i2s_audio
+#     id: echo_speaker
+#     i2s_lrclk_pin: GPIO46
+#     i2s_bclk_pin: GPIO7
+#     mode: mono
+#     output_pin: GPIO6
+#
+# voice_assistant:
+#   microphone: echo_mic
+#   speaker: echo_speaker
+# ---------------------------------------------------------------------------
+
+# Per-device custom components (add yours here, e.g.):
+# sensor:
+#   - platform: custom
+# ...

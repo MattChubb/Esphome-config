@@ -113,7 +113,7 @@ display:
       it.printf(0, 55, id(font1), "%s", id(display_text8).state.c_str());
 
 font:
-  - file: "UbuntuMono[wght].ttf"
+  - file: "fonts/UbuntuMono[wght].ttf"
     id: font1
     size: 9
 
